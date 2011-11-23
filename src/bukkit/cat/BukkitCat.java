@@ -42,6 +42,13 @@ public class BukkitCat extends JavaPlugin {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args)  {
     
+        if (commandLabel.equalsIgnoreCase("hello")){
+            
+            getServer().broadcastMessage("hi");
+            return true;
+        
+        }
+        
         return true;
     
     }
