@@ -1,0 +1,11 @@
+## YAML Template.
+name: Bukkit_Cat
+author: zray
+version: 0.0.1
+main: bukkit.cat.BukkitCat
+description: Bukkit-Cat intergration
+commands:
+  hello:
+    description: test
+    usage: /hello
+---
