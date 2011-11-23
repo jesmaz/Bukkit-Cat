@@ -41,7 +41,7 @@ public class ShrineManager {
             
             if (shrine[i].active){
                 
-                if (b.getX() > shrine[i].x-1 && b.getX() < shrine[i].x+1 && b.getY() > shrine[i].y-1 && b.getY() < shrine[i].y+1 && b.getZ() > shrine[i].z-1 && b.getZ() < shrine[i].z+1){
+                if (b.getX() >= shrine[i].x-1 && b.getX() <= shrine[i].x+1 && b.getY() >= shrine[i].y-1 && b.getY() <= shrine[i].y+1 && b.getZ() >= shrine[i].z-1 && b.getZ() <= shrine[i].z+1){
                     
                     shrine[i].active = false;
                     return true;

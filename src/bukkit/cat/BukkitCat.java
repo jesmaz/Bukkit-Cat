@@ -43,6 +43,7 @@ public class BukkitCat extends JavaPlugin {
         PluginManager pm = this.getServer().getPluginManager();
         BukkitCatBlockListener bl = new BukkitCatBlockListener(this);
         pm.registerEvent(Event.Type.BLOCK_PLACE, bl, Priority.Low, this);
+        pm.registerEvent(Event.Type.BLOCK_BREAK.BLOCK_BREAK.BLOCK_BREAK, bl, Priority.Low, this);
         
     }
     
