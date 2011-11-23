@@ -41,8 +41,8 @@ public class BukkitCat extends JavaPlugin {
         
         log.info(this + "is enabled");
         PluginManager pm = this.getServer().getPluginManager();
-        BukkitCatPlayerListener pl = new BukkitCatPlayerListener(this);
-        pm.registerEvent(Event.Type.BLOCK_PLACE, pl, Priority.Low, this);
+        BukkitCatBlockListener bl = new BukkitCatBlockListener(this);
+        pm.registerEvent(Event.Type.BLOCK_PLACE, bl, Priority.Low, this);
         
     }
     

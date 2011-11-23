@@ -5,17 +5,17 @@
 package bukkit.cat;
 
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.player.PlayerListener;
+import org.bukkit.event.block.BlockListener;
 
 /**
  *
  * @author Jesse
  */
-public class BukkitCatPlayerListener extends PlayerListener {
+public class BukkitCatBlockListener extends BlockListener {
     
     public BukkitCat plugin;
     
-    public BukkitCatPlayerListener(BukkitCat instance){
+    public BukkitCatBlockListener(BukkitCat instance){
         
         plugin = instance;
         
