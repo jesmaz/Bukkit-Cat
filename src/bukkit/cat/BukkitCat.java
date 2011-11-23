@@ -8,6 +8,10 @@ import java.util.logging.Logger;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.event.Event;
+import org.bukkit.event.Event.Priority;
+import org.bukkit.event.Event.Type;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -36,6 +40,9 @@ public class BukkitCat extends JavaPlugin {
     public void onEnable() {
         
         log.info(this + "is enabled");
+        PluginManager pm = this.getServer().getPluginManager();
+        BukkitCatPlayerListener pl = new BukkitCatPlayerListener(this);
+        pm.registerEvent(Event.Type.BLOCK_PLACE, pl, Priority.Low, this);
         
     }
     
