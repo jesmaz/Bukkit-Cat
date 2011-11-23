@@ -5,6 +5,7 @@
 package bukkit.cat;
 
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockListener;
 
 /**
@@ -14,6 +15,7 @@ import org.bukkit.event.block.BlockListener;
 public class BukkitCatBlockListener extends BlockListener {
     
     public BukkitCat plugin;
+    public ShrineManager shrines;
     
     public BukkitCatBlockListener(BukkitCat instance){
         
@@ -46,6 +48,7 @@ public class BukkitCatBlockListener extends BlockListener {
     
     }
     
+    @Override
     public void onBlockPlace(BlockPlaceEvent event){
     
         if (event.getBlock().getTypeId() != 50) return;
@@ -76,7 +79,8 @@ public class BukkitCatBlockListener extends BlockListener {
             
             if (bID[0][1][1] == m && bID[2][1][1] == m){
                 
-                plugin.getServer().broadcastMessage("Shrine created");
+                plugin.getServer().broadcastMessage("A shrine was created by " + event.getPlayer().getName());
+                shrines.addShrine(new Shrine(x, y, z, c));
                 return;
                  
             }
@@ -87,17 +91,26 @@ public class BukkitCatBlockListener extends BlockListener {
             
             if (bID[1][1][0] == m && bID[1][1][2] == m){
                 
-                plugin.getServer().broadcastMessage("Shrine created");
+                plugin.getServer().broadcastMessage("A shrine was created by " + event.getPlayer().getName());
+                shrines.addShrine(new Shrine(x, y, z, c));
                 return;
                  
             }
             
         }
-        
-        
-        plugin.getServer().broadcastMessage("torch!");
         return;
     
+    }
+    
+    @Override
+    public void onBlockBreak(BlockBreakEvent event){
+        
+        if (shrines.blickIsPartOfShrine(event.getBlock())){
+            
+            plugin.getServer().broadcastMessage("A shrine was destroyed by " + event.getPlayer().getName());
+            
+        }
+        
     }
     
 }
