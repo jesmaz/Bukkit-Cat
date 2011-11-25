@@ -28,12 +28,11 @@ public class BukkitCatBlockListener extends BlockListener {
     
     public boolean isValidBlockType (int id){
         
-        if (id == 5) return true;
-        return false;
+        return !plugin.settings.blocksInvalid[id];
         
     }
     
-    public int CheckEnds(int[][][] ids, int m){
+    public byte CheckEnds(int[][][] ids, int m){
         
         if (ids[0][0][1] == m && ids[2][0][1] == m && ids[0][2][1] == m && ids[2][2][1] == m && ids[1][2][1] == m){
             
@@ -73,33 +72,17 @@ public class BukkitCatBlockListener extends BlockListener {
         
         }
         
-        int m = bID[1][0][1];
+        byte m = (byte)bID[1][0][1];
         if (isValidBlockType(m)==false) return;
-        int c = CheckEnds(bID, m);
+        byte c = CheckEnds(bID, m);
         if (c==0) return;
-        
-        if (c<=2) {
             
-            if (bID[0][1][1] == m && bID[2][1][1] == m){
+        if ((bID[0][1][1] == m && bID[2][1][1] == m) || (bID[1][1][0] == m && bID[1][1][2] == m)){
                 
                 plugin.getServer().broadcastMessage("A shrine was created by " + event.getPlayer().getName());
-                shrines.addShrine(new Shrine(x, y, z, c));
+                shrines.addShrine(new Shrine(x, y, z, c, m));
                 return;
                  
-            }
-            
-        }
-        
-        if (c>=3) {
-            
-            if (bID[1][1][0] == m && bID[1][1][2] == m){
-                
-                plugin.getServer().broadcastMessage("A shrine was created by " + event.getPlayer().getName());
-                shrines.addShrine(new Shrine(x, y, z, c));
-                return;
-                 
-            }
-            
         }
         return;
     

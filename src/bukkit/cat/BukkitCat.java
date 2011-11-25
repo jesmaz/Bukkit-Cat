@@ -27,7 +27,7 @@ public class BukkitCat extends JavaPlugin {
      */
     
     Logger log = Logger.getLogger("Minecraft");
-    BukkitCatSettings settings = new BukkitCatSettings();
+    BukkitCatSettings settings;
     BukkitCatBlockListener bl;
     
     public static void main(String[] args) {
@@ -52,6 +52,7 @@ public class BukkitCat extends JavaPlugin {
         
         log.info(this + "is enabled");
         PluginManager pm = this.getServer().getPluginManager();
+        settings = new BukkitCatSettings(this);
         try {
             bl = new BukkitCatBlockListener(this);
         } catch (FileNotFoundException ex) {

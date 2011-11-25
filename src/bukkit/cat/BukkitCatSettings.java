@@ -10,15 +10,28 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
+import java.util.List;
 
 /**
  *
  * @author Jesse
  */
-public class BukkitCatSettings {
+public final class BukkitCatSettings{
     
-    int MaxShrines = 16;
+    int MaxShrines = 512;
+    boolean blocksInvalid[] = new boolean[128];
+    
+    public BukkitCatSettings(BukkitCat plugin){
+       
+        plugin.getConfig();
+        plugin.getConfig().options().copyDefaults(true);
+        MaxShrines = plugin.getConfig().getInt("maxshrines");
+        List<Integer> validblocks = plugin.getConfig().getIntegerList("validblocks");
+        plugin.saveConfig();
+        
+        for (int i=0; i<validblocks.size(); i++) blocksInvalid[validblocks.get(i)] = false;
+        
+    }
     
     public Shrine[] LoadShrines() throws FileNotFoundException, IOException{
         
@@ -29,16 +42,19 @@ public class BukkitCatSettings {
         
         if (!in.isFile()){
             
-            for (int i=0; i<s.length; i++) s[i] = new Shrine(0, 0, 0, 0);
+            for (int i=0; i<s.length; i++) s[i] = new Shrine(0, 0, 0, (byte)0, (byte)0);
             return s;
             
         }
         
         FileInputStream FIS = new FileInputStream(in);
+        byte b;
         
         for (int i=0; i<length; i++){
             
-            bb.put((byte)FIS.read());
+            b = 0;
+            if (FIS.available() != 0)b = (byte)FIS.read();
+            bb.put(b);
             
         }
         
@@ -46,7 +62,7 @@ public class BukkitCatSettings {
         
         for (int i=0; i<MaxShrines; i++){
             
-            s[i] = new Shrine(bb.getInt(), bb.getInt(), bb.getInt(), bb.getInt());
+            s[i] = new Shrine(bb.getInt(), bb.getInt(), bb.getInt(), bb.get(), bb.get(), bb.get(), bb.get());
         
         }
         
@@ -66,7 +82,10 @@ public class BukkitCatSettings {
             bb.putInt(s[i].x);
             bb.putInt(s[i].y);
             bb.putInt(s[i].z);
-            bb.putInt(s[i].facing);
+            bb.put(s[i].facing);
+            bb.put(s[i].matirial);
+            bb.put(s[i].filler1);
+            bb.put(s[i].filler2);
         
         }
         

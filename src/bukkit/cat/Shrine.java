@@ -10,11 +10,18 @@ package bukkit.cat;
  */
 public class Shrine {
     
-    int x, y, z, facing;
+    int x, y, z;
+    byte facing, matirial, filler1=0, filler2=0;
     
-    public Shrine(int lx, int ly, int lz, int f){
+    public Shrine(int lx, int ly, int lz, byte f, byte m){
         
-        x=lx; y=ly; z=lz; facing=f;;
+        x=lx; y=ly; z=lz; facing=f; matirial=m;
+        
+    }
+    
+    public Shrine(int lx, int ly, int lz, byte f, byte m, byte f1, byte f2){
+        
+        x=lx; y=ly; z=lz; facing=f; matirial=m;
         
     }
     

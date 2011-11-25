@@ -24,7 +24,7 @@ public class ShrineManager {
         
         shrine = new Shrine[max];
         plugin = instance;
-        for (int i=0; i<shrine.length; i++) shrine[i] = new Shrine(0, 0, 0, 0);
+        for (int i=0; i<shrine.length; i++) shrine[i] = new Shrine(0, 0, 0, (byte)0, (byte)0);
         shrine = plugin.settings.LoadShrines();
         
     }
@@ -38,7 +38,6 @@ public class ShrineManager {
             if (shrine[i].active()==false){
                 
                 shrine[i] = s;
-                plugin.getServer().broadcastMessage(i+" " + shrine[i].active());
                 try {
                     plugin.settings.SaveShrines(shrine);
                 } catch (FileNotFoundException ex) {

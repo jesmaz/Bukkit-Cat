@@ -1,0 +1,21 @@
+## Make sure to use the block ID rather than the name  of the block (ID's are base 10)
+maxshrines: 512
+validblocks:
+- 4
+- 5
+- 14
+- 15
+- 22
+- 24
+- 35
+- 41
+- 42
+- 45
+- 47
+- 49
+- 57
+- 80
+- 86
+- 87
+- 88
+- 98
