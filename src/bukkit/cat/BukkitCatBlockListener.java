@@ -4,6 +4,8 @@
  */
 package bukkit.cat;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockListener;
@@ -17,7 +19,7 @@ public class BukkitCatBlockListener extends BlockListener {
     public BukkitCat plugin;
     public ShrineManager shrines;
     
-    public BukkitCatBlockListener(BukkitCat instance){
+    public BukkitCatBlockListener(BukkitCat instance) throws FileNotFoundException, IOException{
         
         plugin = instance;
         shrines = new ShrineManager(plugin.settings.MaxShrines, instance);
@@ -51,7 +53,7 @@ public class BukkitCatBlockListener extends BlockListener {
     
     @Override
     public void onBlockPlace(BlockPlaceEvent event){
-    
+        
         if (event.getBlock().getTypeId() != 50) return;
         
         int x = event.getBlock().getX(), y = event.getBlock().getY(), z = event.getBlock().getZ();
@@ -80,8 +82,8 @@ public class BukkitCatBlockListener extends BlockListener {
             
             if (bID[0][1][1] == m && bID[2][1][1] == m){
                 
-                plugin.getServer().broadcastMessage("A shrine was created by " + event.getPlayer().getName() + " at " + x + ", " + y + ", " + z);
-                shrines.addShrine(new Shrine(x, y, z, c, true));
+                plugin.getServer().broadcastMessage("A shrine was created by " + event.getPlayer().getName());
+                shrines.addShrine(new Shrine(x, y, z, c));
                 return;
                  
             }
@@ -92,8 +94,8 @@ public class BukkitCatBlockListener extends BlockListener {
             
             if (bID[1][1][0] == m && bID[1][1][2] == m){
                 
-                plugin.getServer().broadcastMessage("A shrine was created by " + event.getPlayer().getName() + " at " + x + ", " + y + ", " + z);
-                shrines.addShrine(new Shrine(x, y, z, c, true));
+                plugin.getServer().broadcastMessage("A shrine was created by " + event.getPlayer().getName());
+                shrines.addShrine(new Shrine(x, y, z, c));
                 return;
                  
             }

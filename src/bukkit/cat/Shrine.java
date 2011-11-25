@@ -11,12 +11,17 @@ package bukkit.cat;
 public class Shrine {
     
     int x, y, z, facing;
-    boolean active = false;
     
-    public Shrine(int lx, int ly, int lz, int f, boolean a){
+    public Shrine(int lx, int ly, int lz, int f){
         
-        x=lx; y=ly; z=lz; facing=f;
-        active=a;
+        x=lx; y=ly; z=lz; facing=f;;
+        
+    }
+    
+    public boolean active (){
+        
+        if (facing == 0) return false;
+        return true;
         
     }
     

@@ -4,6 +4,9 @@
  */
 package bukkit.cat;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.bukkit.command.Command;
@@ -25,6 +28,7 @@ public class BukkitCat extends JavaPlugin {
     
     Logger log = Logger.getLogger("Minecraft");
     BukkitCatSettings settings = new BukkitCatSettings();
+    BukkitCatBlockListener bl;
     
     public static void main(String[] args) {
     }
@@ -32,7 +36,14 @@ public class BukkitCat extends JavaPlugin {
     @Override
     public void onDisable() {
         
-        log.info(this + "is disabled");
+        try {
+            settings.SaveShrines(bl.shrines.shrine);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(BukkitCat.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(BukkitCat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        log.info(this + " is disabled");
         
     }
 
@@ -41,7 +52,13 @@ public class BukkitCat extends JavaPlugin {
         
         log.info(this + "is enabled");
         PluginManager pm = this.getServer().getPluginManager();
-        BukkitCatBlockListener bl = new BukkitCatBlockListener(this);
+        try {
+            bl = new BukkitCatBlockListener(this);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(BukkitCat.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(BukkitCat.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pm.registerEvent(Event.Type.BLOCK_BREAK, bl, Priority.Low, this);
         pm.registerEvent(Event.Type.BLOCK_PLACE, bl, Priority.Normal, this);
         
