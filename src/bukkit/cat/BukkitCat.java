@@ -10,7 +10,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.Event;
 import org.bukkit.event.Event.Priority;
-import org.bukkit.event.Event.Type;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -25,6 +24,7 @@ public class BukkitCat extends JavaPlugin {
      */
     
     Logger log = Logger.getLogger("Minecraft");
+    BukkitCatSettings settings = new BukkitCatSettings();
     
     public static void main(String[] args) {
     }
@@ -42,20 +42,20 @@ public class BukkitCat extends JavaPlugin {
         log.info(this + "is enabled");
         PluginManager pm = this.getServer().getPluginManager();
         BukkitCatBlockListener bl = new BukkitCatBlockListener(this);
-        pm.registerEvent(Event.Type.BLOCK_PLACE, bl, Priority.Low, this);
-        pm.registerEvent(Event.Type.BLOCK_BREAK.BLOCK_BREAK.BLOCK_BREAK, bl, Priority.Low, this);
+        pm.registerEvent(Event.Type.BLOCK_BREAK, bl, Priority.Low, this);
+        pm.registerEvent(Event.Type.BLOCK_PLACE, bl, Priority.Normal, this);
         
     }
     
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args)  {
     
-        if (commandLabel.equalsIgnoreCase("hello")){
+        /*if (commandLabel.equalsIgnoreCase("hello")){
             
             getServer().broadcastMessage("hi");
             return true;
         
-        }
+        }*/
         
         return true;
     

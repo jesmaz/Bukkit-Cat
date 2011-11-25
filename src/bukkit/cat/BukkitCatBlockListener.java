@@ -20,6 +20,7 @@ public class BukkitCatBlockListener extends BlockListener {
     public BukkitCatBlockListener(BukkitCat instance){
         
         plugin = instance;
+        shrines = new ShrineManager(plugin.settings.MaxShrines, instance);
         
     }
     
@@ -80,7 +81,7 @@ public class BukkitCatBlockListener extends BlockListener {
             if (bID[0][1][1] == m && bID[2][1][1] == m){
                 
                 plugin.getServer().broadcastMessage("A shrine was created by " + event.getPlayer().getName() + " at " + x + ", " + y + ", " + z);
-                shrines.addShrine(new Shrine(x, y, z, c));
+                shrines.addShrine(new Shrine(x, y, z, c, true));
                 return;
                  
             }
@@ -92,7 +93,7 @@ public class BukkitCatBlockListener extends BlockListener {
             if (bID[1][1][0] == m && bID[1][1][2] == m){
                 
                 plugin.getServer().broadcastMessage("A shrine was created by " + event.getPlayer().getName() + " at " + x + ", " + y + ", " + z);
-                shrines.addShrine(new Shrine(x, y, z, c));
+                shrines.addShrine(new Shrine(x, y, z, c, true));
                 return;
                  
             }
@@ -104,7 +105,9 @@ public class BukkitCatBlockListener extends BlockListener {
     
     @Override
     public void onBlockBreak(BlockBreakEvent event){
-        plugin.getServer().broadcastMessage(event.getBlock().getLocation().getBlockX() + ", " + event.getBlock().getLocation().getBlockY() + ", " + event.getBlock().getLocation().getBlockZ());
+        //plugin.getServer().broadcastMessage(event.getBlock().getLocation().getBlockX() + ", " + event.getBlock().getLocation().getBlockY() + ", " + event.getBlock().getLocation().getBlockZ());
+        //plugin.getServer().broadcastMessage(shrines.shrine.length+"");
+        //plugin.getServer().broadcastMessage("");
         if (shrines.blickIsPartOfShrine(event.getBlock())){
             
             plugin.getServer().broadcastMessage("A shrine was destroyed by " + event.getPlayer().getName());

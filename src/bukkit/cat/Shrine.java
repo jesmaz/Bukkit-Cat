@@ -11,12 +11,12 @@ package bukkit.cat;
 public class Shrine {
     
     int x, y, z, facing;
-    boolean active;
+    boolean active = false;
     
-    public Shrine(int lx, int ly, int lz, int f){
+    public Shrine(int lx, int ly, int lz, int f, boolean a){
         
         x=lx; y=ly; z=lz; facing=f;
-        active=true;
+        active=a;
         
     }
     
